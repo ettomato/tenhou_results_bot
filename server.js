@@ -37,12 +37,12 @@ function handleEvent(event) {
 
   // create a echoing text message
   const echo = { type: 'text', text: event.message.text };
-  
+
   const returnMessage = imputMessage => {
     if (imputMessage.text === 'こんにちは'){
-      return 'こんにちは';
+      return {type: 'text', text: 'こんにちは'};
     } else {
-      return 'よくわかりません';
+      return {type: 'text', text: 'よくわかりません'};
     }
   };
 
