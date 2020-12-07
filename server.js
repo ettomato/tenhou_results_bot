@@ -37,8 +37,9 @@ function handleEvent(event) {
 
   // create a echoing text message
   const echo = { type: 'text', text: event.message.text };
-  const returnMessage = echo => {
-    if (echo === 'こんにちは'){
+  
+  const returnMessage = imputMessage => {
+    if (imputMessage.text === 'こんにちは'){
       return 'こんにちは';
     } else {
       return 'よくわかりません';
@@ -46,7 +47,7 @@ function handleEvent(event) {
   };
 
   // use reply API
-  return client.replyMessage(event.replyToken, returnMessage);
+  return client.replyMessage(event.replyToken, returnMessage(echo));
 }
 
 // listen on port
