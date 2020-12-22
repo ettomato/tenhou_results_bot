@@ -49,7 +49,7 @@ function handleEvent(event) {
       return res.json(); 
       })
       .then((data) => {
-      returnText(data);
+      return returnText(data);
       })
       .catch((err) => {
       console.error( err );
