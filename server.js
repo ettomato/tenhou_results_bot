@@ -2,6 +2,7 @@
 
 const line = require('@line/bot-sdk');
 const express = require('express');
+const fetch = require('node-fetch');
 
 // create LINE SDK config from env variables
 const config = {
@@ -39,8 +40,23 @@ function handleEvent(event) {
   const echo = { type: 'text', text: event.message.text };
 
   const returnMessage = imputMessage => {
-    if (imputMessage.text === 'こんにちは'){
-      return {type: 'text', text: 'こんにちは'};
+    if (imputMessage.text === '成績'){ 
+      // get results JSON
+      const api_url = 'https://script.google.com/macros/s/AKfycbz2XxvmlqZC2gsYjPn1BAAJxwdcR5Cth_5_ef-ef-7yZ8zSQAo/exec'
+
+      fetch(api_url, {method: 'GET'}).then((res) => {
+      console.log( res );
+      return res.json(); 
+      })
+      .then((data) => {
+      returnText(data);
+      })
+      .catch((err) => {
+      console.error( err );
+      });
+      const returnText = jsonObj => {
+        return {type: 'text', text: '成績は' + jsonObj.Total_points + 'です。'};
+      }
     } else {
       return {type: 'text', text: 'よくわかりません'};
     }
