@@ -49,14 +49,14 @@ function handleEvent(event) {
       })
       .then((data) => {
         const totalPoints = data[0].Total_points;
-        return returnText(totalPoints);
+        returnText(totalPoints);
       })
       .catch((err) => {
         console.error( err );
       });
 
-      const returnText = jsonObj => {
-        return {type: 'text', text: '成績は' + jsonObj + 'です。'};
+      const returnText = score => {
+        return {type: 'text', text: '成績は' + score + 'です。'};
       };
     } else {
       return {type: 'text', text: 'よくわかりません'};
