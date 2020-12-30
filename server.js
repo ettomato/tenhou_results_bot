@@ -39,27 +39,24 @@ function handleEvent(event) {
   // create a echoing text message
   const echo = { type: 'text', text: event.message.text };
 
-  const returnText = score => {
-    return {type: 'text', text: '成績は' + score + 'です。'};
-  };
-
   const returnMessage = imputMessage => {
     if (imputMessage.text === '成績'){ 
-
-      // get results JSON
-      // const api_url = 'https://script.google.com/macros/s/AKfycbz2XxvmlqZC2gsYjPn1BAAJxwdcR5Cth_5_ef-ef-7yZ8zSQAo/exec';
-      
-      // fetch(api_url).then((res) => {
-      //   return res.json(); 
-      // })
-      // .then((data) => {
-      //   const totalPoints = data[0].Total_points;
-      //   returnText(totalPoints);
-      // })
-      // .catch((err) => {
-      //   console.error( err );
-      // });
-      returnText('ホゲ');
+      const api_url = 'https://script.google.com/macros/s/AKfycbz2XxvmlqZC2gsYjPn1BAAJxwdcR5Cth_5_ef-ef-7yZ8zSQAo/exec';
+  
+      fetch(api_url).then((res) => {
+        return res.json(); 
+      })
+      .then((data) => {
+        const totalPoints = data[0].Total_points;
+        returnText(totalPoints);
+      })
+      .catch((err) => {
+        console.error( err );
+      });
+    
+      const returnText = score => {
+        return {type: 'text', text: '成績は' + score + 'です。'};
+      };
     } else {
       return {type: 'text', text: 'よくわかりません'};
     }
